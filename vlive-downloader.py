@@ -89,4 +89,4 @@ def watch(video_id, resolution, locale="en_US"):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=3000)
