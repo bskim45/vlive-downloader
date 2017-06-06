@@ -34,6 +34,7 @@ def getJSONURL(url):
             video_id = video_data[5].strip().replace('"', '')
             video_key = video_data[6].strip().replace('"', '')
             url = "http://global.apis.naver.com/rmcnmv/rmcnmv/vod_play_videoInfo.json?videoId=" + video_id + "&key=" + video_key
+    pp(url)
     return url
 
 def getVideoList(video_id):
@@ -85,8 +86,9 @@ def watch(video_id, resolution, locale="en_US"):
     for item in video_list:
         if item['encodingOption']['name'] == resolution:
             video_url = item['source']
-    return render_template('video.html', video_url = video_url, caption_list = caption_list)
+
+    return render_template('video.html', video_url = video_url, caption_list = caption_list, locale = locale)
 
 
 if __name__ == "__main__":
-    app.run(port=3000)
+    app.run(debug=True)
