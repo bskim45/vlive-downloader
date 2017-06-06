@@ -1,0 +1,99 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/fontawesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/g/animatecss@3.5.0,emojione@2.2.6(assets/css/emojione.min.css)">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.2.3/jquery.min.js"></script>
+</head>
+
+<body>
+    {% if error %}
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6">
+            <h3> There was an error processing your request. Please check that the video URL exists.</h3>
+            <a id="goto-link" href="javascript: window.history.back()" class="btn btn-primary">
+                <i class="fa fa-arrow-left">&nbsp&nbspBack</i>
+            </a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-thumbnail video-large-thumbnail img-responsive" src="{{thumbnail_url}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 video">
+                <p class="vid-meta">
+                    <span class="link">
+                        <i class="fa fa-link"></i>
+                        <a rel="noreferrer nofollow noopener" target="_blank" href="http://www.vlive.tv/video/{{video_id}}">http://www.vlive.tv/video/{{video_id}}</a>
+                    </span>
+                </p>
+                <h3>
+                    <i class="fa fa-file-video-o"></i>
+                    Video
+                </h3>
+                <ul class="vid-links list-inline">
+                    Download:
+                    {% for item in video_list %}
+                    <li>
+                        <a rel="noreferrer noopener" class="btn btn-default dl-link" target="_blank" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Right-click and 'Save As'" href="{{item['source']}}">
+                            {{item['encodingOption']['name']}} <i class="fa fa-download"></i>
+                        </a>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+
+                <ul class="vid-links list-inline">
+                    Play:
+                    {% for item in video_list %}
+                    <li>
+                        <a class="btn btn-default " href="/video/{{video_id}}/{{item['encodingOption']['name']}}">
+                            {{item['encodingOption']['name']}} <i class="fa fa-play-circle"></i>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+
+                <h3>
+                    <i class="fa fa-file-text-o"></i>
+                    Subtitles
+                </h3>
+                {% if not caption_list %}
+                    <span>No subtitles available (yet)</span>
+                {% else %}
+                <p class="note">
+                    <i class="fa fa-info-circle"></i>
+                    srt subtitle files are more commonly supported in video players. If the srt
+                    file doesn't work, please use the vtt one instead.
+                </p>
+                <ul class="sub-links list-inline">
+                    {% for item in caption_list%}
+                    <li>
+                        {{ item.label }} {% if item.subLabel %}({{item.subLabel}}){% endif %}
+                        <a rel="nofollow" class="btn btn-default btn-sm dl-link" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Right-click and 'Save As'" target="_blank" href="/srt/{{video_id}}/{{item.locale}}">
+                            <span class="ext srt">srt</span>
+                            <i class="fa fa-download"></i>
+                        </a>
+                        <a rel="noreferrer noopener" class="btn btn-default btn-sm dl-link" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Right-click and 'Save As'" target="_blank" href="{{ item.source }}">
+                            <span class="ext vtt">vtt</span>
+                            <i class="fa fa-download"></i>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+<script type="text/javascript" src="//cdn.jsdelivr.net/g/bootstrap@3.3.6"></script>
+
+
+</html>

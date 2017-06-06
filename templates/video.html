@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body style="background-color:#fff;text-align:center;padding:0;margin:0;">
+        <video style="max-width:90%;max-height:90%;background-color:#eee;border:1px solid #1ecfff;padding:4px;border-radius:4px;" preload="auto" autoplay controls crossorigin="anonymous" src="{{video_url}}">
+            {% for item in caption_list %}
+            <track kind="subtitles" label="{{item.label}}" src="{{item.source}}" srclang="{{item.lang}}" default/>
+            {% endfor %}
+        </video>
+    </body>
+</html>
