@@ -2,13 +2,11 @@ from bs4 import BeautifulSoup
 import re, os
 import requests
 import json
-import pprint
 from flask import Flask, render_template, request, url_for, send_file, send_from_directory
 from StringIO import StringIO
 from pycaption import WebVTTReader, SRTWriter
 
 app = Flask(__name__)
-pp = pprint.PrettyPrinter(indent=4).pprint
 
 @app.route("/", methods = ['GET'])
 @app.route("/<video_id>", methods = ['GET'])
