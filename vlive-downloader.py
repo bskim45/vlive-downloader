@@ -32,7 +32,6 @@ def getJSONURL(url):
             video_id = video_data[5].strip().replace('"', '')
             video_key = video_data[6].strip().replace('"', '')
             url = "http://global.apis.naver.com/rmcnmv/rmcnmv/vod_play_videoInfo.json?videoId=" + video_id + "&key=" + video_key
-    pp(url)
     return url
 
 def getVideoList(video_id):
