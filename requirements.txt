@@ -2,3 +2,4 @@ pycaption==0.5.5
 Flask==0.10.1
 beautifulsoup4==4.4.1
 requests==2.7.0
+pycaption==0.5.5

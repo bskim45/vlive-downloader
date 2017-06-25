@@ -88,4 +88,4 @@ def watch(video_id, resolution, locale="en_US"):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0')
